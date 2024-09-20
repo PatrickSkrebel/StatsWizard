@@ -1,0 +1,44 @@
+﻿@model StatsWizard.Models.StandingsModel
+
+@{
+    ViewData["Title"] = "NBA Standings";
+}
+
+<div class="text-center">
+    <h1 class="display-4">NBA Standings</h1>
+    <h2 class="display-4">Season @Model.Season.Year</h2>
+
+    @foreach (var conference in Model.Conferences)
+    {
+        <h3>@conference.Name</h3>
+        @foreach (var division in conference.Divisions)
+        {
+            <h4>@division.Name</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Conf</th>
+                        <th>Div</th>
+                        <th>Team</th>
+                        <th>Wins</th>
+                        <th>Losses</th>
+                        <th>Win Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var team in division.Teams)
+                    {
+                        <tr>
+                            <td>@team.Calc_Rank.Conf_Rank</td>
+                            <td>@team.Calc_Rank.Div_Rank</td>
+                            <td>@team.Market @team.Name</td>
+                            <td>@team.Wins</td>
+                            <td>@team.Losses</td>
+                            <td>@team.Win_Pct</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+</div>
