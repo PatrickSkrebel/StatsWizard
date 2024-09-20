@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace StatsWizard.Controllers
 {
-    public class NBAController : Controller
+    public class NFLController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly StandingsService _standingsService;
 
-        public NBAController(ILogger<HomeController> logger, StandingsService standingsService)
+        public NFLController(ILogger<HomeController> logger, StandingsService standingsService)
         {
             _logger = logger;
             _standingsService = standingsService;
         }
 
-        public IActionResult NBAHome()
+        public IActionResult NFLHome()
         {
-            return View(); // This will look for Views/NBA/NBAHome.cshtml
+            return View(); // This will look for Views/NFL/NFLHome.cshtml
         }
 
 

@@ -19,14 +19,11 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        <li class="nav-item" id="home-link">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="NBA" asp-action="Standings">NBA Standings</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -34,9 +31,9 @@
                                 Select Sport
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">NBA</a></li>
-                                <li><a class="dropdown-item" href="#">NFL</a></li>
-                                <li><a class="dropdown-item" href="#">MLB</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("NBAHome", "NBA")" data-sport="NBA">NBA</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("NFLHome", "NFL")" data-sport="NFL">NFL</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MLBHome", "MLB")" data-sport="MLB">MLB</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -58,6 +55,39 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const homeLink = document.getElementById('home-link').querySelector('a');
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+
+            // Set the initial home link text
+            homeLink.innerHTML = 'Home';
+
+            // Check if there's a sport saved in session storage
+            const selectedSport = sessionStorage.getItem('selectedSport');
+            if (selectedSport) {
+                homeLink.innerHTML = `Home`;
+            }
+
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent default action for anchor
+
+                    const sport = this.getAttribute('data-sport');
+                    const url = this.getAttribute('href'); // Get the URL from the link
+
+                    // Store the selected sport in session storage
+                    sessionStorage.setItem('selectedSport', sport);
+
+                    // Update home link text and navigate to the selected sport page
+                    homeLink.innerHTML = `Home`;
+                    window.location.href = url; // Navigate to the selected sport page
+                });
+            });
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

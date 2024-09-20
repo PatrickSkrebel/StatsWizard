@@ -1,0 +1,15 @@
+﻿@model StatsWizard.Models.StandingsModel// Adjust this line if you have a model
+@{
+    ViewData["Title"] = "NBA Home";
+}
+
+<div>
+    <h1>NBA Home</h1>
+    <p>Welcome to the NBA home page. Here you can find NBA-related content.</p>
+    <p>
+        <a asp-area="" asp-controller="NBA" asp-action="Standings">News</a> |
+        <a asp-area="" asp-controller="NBA" asp-action="Standings">Standings</a> |
+        <a asp-area="" asp-controller="NBA" asp-action="Standings">League Leaders</a>
+    </p>
+
+</div>

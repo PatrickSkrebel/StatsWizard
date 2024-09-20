@@ -17,6 +17,8 @@ namespace StatsWizard.Controllers
             _standingsService = standingsService;
         }
 
+
+
         public async Task<IActionResult> Index()
         {
             var standings = await _standingsService.GetStandingsAsync();
