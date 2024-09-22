@@ -8,26 +8,26 @@ namespace StatsWizard.Controllers
 {
     public class NFLController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly StandingsService _standingsService;
+        private readonly ILogger<NFLController> _logger; // Changed from HomeController to NFLController
+        private readonly NFLStandingService _nflStandingService; // Changed to NFLStandingService
 
-        public NFLController(ILogger<HomeController> logger, StandingsService standingsService)
+        public NFLController(ILogger<NFLController> logger, NFLStandingService nflStandingService)
         {
             _logger = logger;
-            _standingsService = standingsService;
+            _nflStandingService = nflStandingService; // Adjusted service name
         }
 
         public IActionResult NFLHome()
         {
-            return View(); // This will look for Views/NFL/NFLHome.cshtml
+            return View(); // Looks for Views/NFL/NFLHome.cshtml
         }
-
 
         public async Task<IActionResult> Standings()
         {
-            var standings = await _standingsService.GetStandingsAsync();
+            var standings = await _nflStandingService.GetStandingsAsync();
             return View(standings);
         }
+
 
         public IActionResult Privacy()
         {

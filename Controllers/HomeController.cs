@@ -21,8 +21,7 @@ namespace StatsWizard.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var standings = await _standingsService.GetStandingsAsync();
-            return View(standings);
+            return View();
         }
 
         public IActionResult Privacy()

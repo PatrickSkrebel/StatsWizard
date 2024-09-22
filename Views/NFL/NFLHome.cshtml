@@ -1,4 +1,4 @@
-﻿@model StatsWizard.Models.StandingsModel // Adjust if necessary
+﻿@model StatsWizard.Models.NFL.NFLStandingModel // Adjust this line based on your actual model
 @{
     ViewData["Title"] = "NFL Home";
 }
@@ -8,10 +8,8 @@
     <p>Welcome to the NFL home page. Here you can find NFL-related content.</p>
 
     <p>
-        <a asp-area="" asp-controller="NBA" asp-action="Standings">News</a> |
-        <a asp-area="" asp-controller="NBA" asp-action="Standings">Standings</a> |
-        <a asp-area="" asp-controller="NBA" asp-action="Standings">League Leaders</a>
+        <a asp-area="" asp-controller="NFL" asp-action="Standings">News</a> |
+        <a asp-area="" asp-controller="NFL" asp-action="Standings">Standings</a> |
+        <a asp-area="" asp-controller="NFL" asp-action="Standings">League Leaders</a>
     </p>
-
-
 </div>

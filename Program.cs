@@ -5,14 +5,22 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Register the HTTP client and StandingsService
+// Register HTTP client for StandingsService (NBA)
 builder.Services.AddHttpClient<StandingsService>(client =>
 {
-    client.BaseAddress = new Uri("https://api.sportradar.com/nba/trial/v8/en/seasons/2023/REG/"); // Base address for API requests
+    client.BaseAddress = new Uri("https://api.sportradar.com/nba/trial/v8/en/seasons/2023/REG/"); // NBA API base address
+});
+
+// Register HTTP client for NFLStandingService (NFL)
+builder.Services.AddHttpClient<NFLStandingService>(client =>
+{
+    client.BaseAddress = new Uri("https://api.sportradar.com/nfl/trial/v8/en/seasons/2023/REG/"); // NFL API base address
 });
 
 // Add the StandingsService to the DI container
 builder.Services.AddScoped<StandingsService>();
+// Add NFLStandingService to the DI container
+builder.Services.AddScoped<NFLStandingService>();
 
 var app = builder.Build();
 

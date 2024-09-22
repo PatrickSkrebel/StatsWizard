@@ -1,10 +1,68 @@
-﻿@page
-@model StatsWizard.Views.NFL.StandingsModel
+﻿@model StatsWizard.Models.NFL.NFLStandingModel
+
 @{
     ViewData["Title"] = "NFL Standings";
 }
 
+<div class="text-center">
+    <h1 class="display-4">NFL Standings</h1>
+    <h2 class="display-4">Season @Model.Season.Year</h2>
 
-<div>
-    <h1>NFL Standings</h1>
+    @foreach (var conference in Model.Conferences)
+    {
+        <h3>@conference.Name</h3>
+        @foreach (var division in conference.Divisions)
+        {
+            <h4>@division.Name</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Conf</th>
+                        <th>Div</th>
+                        <th>Team</th>
+                        <th>Wins</th>
+                        <th>Ties</th>
+                        <th>Losses</th>
+                        <th>Win Percentage</th>
+                        <th>Road</th>
+                        <th>Home</th>
+                        <th>Div</th>
+                        <th>Conf</th>
+                        <th>NFC</th>
+                        <th>AFC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var team in division.Teams.OrderByDescending(t => t.Win_Pct))
+                    {
+                        // Initialize the record values within the team loop
+                        var roadRecord = team.Records.FirstOrDefault(r => r.Category == "road");
+                        var homeRecord = team.Records.FirstOrDefault(r => r.Category == "home");
+                        var divisionRecord = team.Records.FirstOrDefault(r => r.Category == "division");
+                        var conferenceRecord = team.Records.FirstOrDefault(r => r.Category == "conference");
+                        var nfcRecord = team.Records.FirstOrDefault(r => r.Category == "nfc");
+                        var afcRecord = team.Records.FirstOrDefault(r => r.Category == "afc");
+
+                        <tr>
+                            <td>@team.Rank.Conference</td>
+                            <td>@team.Rank.Division</td>
+                            <td>@team.Market @team.Name</td>
+                            <td>@team.Wins</td>
+                            <td>@team.Ties</td>
+                            <td>@team.Losses</td>
+                            <td>@team.Win_Pct</td>
+
+
+                            <td>@roadRecord?.Wins-@roadRecord?.Ties-@roadRecord?.Losses</td>
+                            <td>@homeRecord?.Wins-@homeRecord?.Ties-@homeRecord?.Losses</td>
+                            <td>@divisionRecord?.Wins-@divisionRecord?.Ties-@divisionRecord?.Losses</td>
+                            <td>@conferenceRecord?.Wins-@conferenceRecord?.Ties-@conferenceRecord?.Losses</td>
+                            <td>@nfcRecord?.Wins-@nfcRecord?.Ties-@nfcRecord?.Losses</td>
+                            <td>@afcRecord?.Wins-@afcRecord?.Ties-@afcRecord?.Losses</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
 </div>
